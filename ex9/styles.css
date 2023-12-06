@@ -1,0 +1,10 @@
+body {
+    background-color:purple;
+    text-align: center;
+    margin-top: 200px;
+}
+
+button {
+    margin-bottom: 20px;
+    background-color: brown;
+}
