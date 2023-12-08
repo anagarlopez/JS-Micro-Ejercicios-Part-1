@@ -1,26 +1,32 @@
-// Escribir un programa que escriba en pantalla los divisores comunes de dos números dados
+//Escribir un programa que escriba en pantalla los divisores de un número dado
 
 // Ponemos el escuchador de eventos al botón
+document.getElementById('resultBtn').addEventListener('click', function() {
+    // Obtener el número ingresado por el usuario
+    const numero = parseInt(document.getElementById('numeroInput').value);
 
-const resultsBtn = document.getElementById("resultBtn");
+    // Verificar si el número es válido
+    if (!isNaN(numero)) {
+      // Encontrar y mostrar los divisores
+      const divisores = encontrarDivisores(numero);
+      const resultadoElement = document.getElementById('resultado');
+      resultadoElement.textContent = `Los divisores de ${numero} son: ${divisores.join(', ')}`;
+    } else {
+      // Mostrar un mensaje si el número no es válido
+      alert('Por favor, ingresa un número válido.');
+    }
+  });
 
-function divisorCommon() {
-// declarar variable que recoge el número del usuario: "num"
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
-    let resultDivisors = document.getElementById("result");
+  function encontrarDivisores(numero) {
+    // Inicializar un array para almacenar los divisores
+    const divisores = [];
 
-  // declarar variable "divisorsNum" como array vacío
-    let divisorsNum = [];
-    
-    result.innerHTML = "Los divisores comunes de " + num1 + " y " + num2 + " son: ";
-// añadir con métido .push el número por el cuál es divisible
-    for (let i = 0; i <=(num1, num2); i++) {
-        if (num1 % i === 0 && num2 % i === 0 ) {
-            divisorsNum.push(i);      
-        }        
-    }    
-    result.innerHTML += divisorsNum.join(", ");  
- 
-}
-    resultsBtn.addEventListener("click", divisorCommon);
+    // Iterar desde 1 hasta el número para encontrar los divisores
+    for (let i = 1; i <= numero; i++) {
+      if (numero % i === 0) {
+        divisores.push(i);
+      }
+    }
+
+    return divisores;
+  }

@@ -1,32 +1,33 @@
-//Escribir un programa que escriba en pantalla los divisores de un número dado
+// Escribir un programa que nos diga si un número dado es primo (no es divisible por ninguno otro número que no sea él mismo o la unidad)
 
-// Ponemos el escuchador de eventos al botón
-document.getElementById('resultBtn').addEventListener('click', function() {
-    // Obtener el número ingresado por el usuario
-    const numero = parseInt(document.getElementById('numeroInput').value);
+function numPrimo(numero) {
+    if (numero <= 1) {
+        return false;
+    }
 
-    // Verificar si el número es válido
-    if (!isNaN(numero)) {
-      // Encontrar y mostrar los divisores
-      const divisores = encontrarDivisores(numero);
-      const resultadoElement = document.getElementById('resultado');
-      resultadoElement.textContent = `Los divisores de ${numero} son: ${divisores.join(', ')}`;
+    for (let i = 2; i <= Math.sqrt(numero); i++) {
+        if (numero % i === 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function verificarPrimo() {
+    const inputNumero = document.getElementById('numero');
+    const resultado = document.getElementById('resultado');
+
+    const numero = parseInt(inputNumero.value);
+
+    if (isNaN(numero)) {
+        resultado.textContent = 'Por favor, ingrese un número válido.';
+        return;
+    }
+
+    if (numPrimo(numero)) {
+        resultado.textContent = `${numero} es un número primo.`;
     } else {
-      // Mostrar un mensaje si el número no es válido
-      alert('Por favor, ingresa un número válido.');
+        resultado.textContent = `${numero} no es un número primo.`;
     }
-  });
-
-  function encontrarDivisores(numero) {
-    // Inicializar un array para almacenar los divisores
-    const divisores = [];
-
-    // Iterar desde 1 hasta el número para encontrar los divisores
-    for (let i = 1; i <= numero; i++) {
-      if (numero % i === 0) {
-        divisores.push(i);
-      }
-    }
-
-    return divisores;
-  }
+}
